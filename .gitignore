@@ -5,3 +5,4 @@
 *.npy
 !devices.csv
 .ipynb_checkpoints
+Models/M_seq_fingeprinting/*

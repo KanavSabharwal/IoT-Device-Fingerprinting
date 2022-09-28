@@ -25,8 +25,6 @@ def custom_split(features_main,silences,labels):
 
     return X_train_feat,X_test_feat,X_train_silence,X_test_silence,Y_train,Y_test
 
-
-
 def get_model():
     dtype = 'float64'
     dropout=0.2

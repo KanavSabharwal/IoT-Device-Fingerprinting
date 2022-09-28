@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from multiprocessing import Pool
 import os 
-from constants import device_name,actual_id
+from constants import device_name,actual_id,total_time,omega
 from split import split_traces_mseq
 
 def check_polarity(ip_src:str)->int:
@@ -37,7 +37,7 @@ def group_by_first_col(arr):
     return np.split(arr[:,1:], np.unique(arr[:, 0], return_index=True)[1][1:])
 
 def process_feature(feat_vect):
-    # Helper Function to process one entry
+    # Helper Function to process one entry in time series
     unique,ind = np.unique(feat_vect[:, 0], return_index=True)
     missing = [i for i in range(40) if i not in unique]
     if len(missing)>0:
@@ -51,7 +51,17 @@ def process_feature(feat_vect):
     
     return np.array(list(map(lambda x:np.sum(x,0),feat_list)))
 
-def process_csv(experiment_tuple,total_time=4,omega=0.1):
+def process_csv(experiment_tuple,total_time=total_time,omega=omega):
+    """The function processes one .csv file, generates the feature vectors for the traffic exchanged, and saves
+    the generated features. Each .csv file has traffic for a given day, and a given device.
+
+    Args:
+        experiment_tuple: Shares the day and device, whose csv is to be fetched 
+        total_time : Total observation time of the time series
+        omega: Sampling rate of time series
+
+    Returns: None
+    """
     day,device = experiment_tuple
 
     file_name = 'data/split-trace/day_'+str(day)+'_'+str(device)+'.csv'
@@ -105,7 +115,10 @@ def process_csv(experiment_tuple,total_time=4,omega=0.1):
     
     return None
 
-def collate_traces():    
+def collate_traces():
+    """
+    Collates the individual feature vectors generated for each day/device into a single numpy array
+    """    
     main_file = 'data/Traces_Mseq'
 
     experiments_all = []

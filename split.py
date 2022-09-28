@@ -1,14 +1,17 @@
 import pandas as pd
+import os
 
 pd.options.mode.chained_assignment = None
 
 
 def split_traces_mseq():
-    days_csv = ['day1.csv', 'day2.csv', 'day3.csv', 'day4.csv', 'day5.csv', 'day6.csv', 'day7.csv', 'day8.csv', 'day9.csv', 'day10.csv', 'day11.csv', 'day12.csv', 'day13.csv', 'day14.csv', 'day15.csv', 'day16.csv', 'day17.csv', 'day18.csv', 'day19.csv', 'day20.csv']
+    days_csv = os.listdir('data/original-trace')
+    days_csv = [file for file in days_csv if not (file.startswith('.') or file =='placeholder.txt')]
+    
     global_pcaps_arr = []
     for day in days_csv:
         print("Reading", day)
-        global_pcap = pd.read_csv('data/original-trace/' + day, delimiter='\t')
+        global_pcap = pd.read_csv('data/original-trace/' + day, delimiter='\t',low_memory=False)
 
         # filter only outgoing connections (packets an adversary can see)
         relevant_pcap = global_pcap[
