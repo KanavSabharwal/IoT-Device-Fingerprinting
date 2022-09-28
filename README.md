@@ -1,7 +1,6 @@
 # IoT-Device-Fingerprinting
 ## <img src="https://latex.codecogs.com/gif.latex?\mathcal{M}_\text{seq}" /> Classifier
 ### Data required
-Network traces are required to train the iPet generators.
 
 `pcap` packet capture files must be used to generate corresponding `csv` files that contain the specific fields (stated below). They must be placed in the `data/original-trace` directory. Note that the rows in the `csv` file correspond to packet metadata for a particular device communicating with one or more servers on the internet. We decompose the `pcap` file contains traffic from multiple devices for each day into separate `csv` files. The file may follow a naming convention `day[x].csv`.
 
