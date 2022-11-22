@@ -44,12 +44,7 @@ $ python Train_Mseq.py
 The trained model is saved in the ```Models/M_seq_fingeprinting``` directory
 
 ## <img src="https://latex.codecogs.com/gif.latex?\mathcal{M}_\text{agg}" /> Classifier
-
-<<<<<<< HEAD
-To be added
-=======
 #### Training Classifier
-
 ##### Configuration
 To allow a user to customise their iPet instance, we expect them to specify the following variables in `constants.py`:
 - `agg_mins`: The total time a single feature vector aggregates on , in minutes
@@ -75,4 +70,3 @@ You can access the model using
 import pickle
 model_magg = pickle.load(open('Models/M_agg_fingeprinting.sav', 'rb'))
 ```
->>>>>>> 0a39d5a (Adding M_agg)
