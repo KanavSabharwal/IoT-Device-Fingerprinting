@@ -1,5 +1,5 @@
 # IoT-Device-Fingerprinting
-## <img src="https://latex.codecogs.com/gif.latex?\mathcal{M}_\text{seq}" /> Classifier
+
 ### Data required
 
 `pcap` packet capture files must be used to generate corresponding `csv` files that contain the specific fields (stated below). They must be placed in the `data/original-trace` directory. Note that the rows in the `csv` file correspond to packet metadata for a particular device communicating with one or more servers on the internet. We decompose the `pcap` file contains traffic from multiple devices for each day into separate `csv` files. The file may follow a naming convention `day[x].csv`.
@@ -19,8 +19,8 @@ The reqiured fields are:
 
 A sample of the network traces in the expected format has been shared [here](https://drive.google.com/drive/folders/1gRkcrPupkYTWvYlgkkDKDmsP2FsJzG-g?usp=sharing).
 
-### Running
-#### Training Generators
+## <img src="https://latex.codecogs.com/gif.latex?\mathcal{M}_\text{seq}" /> Classifier
+#### Training Classifier
 
 ##### Configuration
 To allow a user to customise their iPet instance, we expect them to specify the following variables in `constants.py`:
@@ -45,4 +45,34 @@ The trained model is saved in the ```Models/M_seq_fingeprinting``` directory
 
 ## <img src="https://latex.codecogs.com/gif.latex?\mathcal{M}_\text{agg}" /> Classifier
 
+<<<<<<< HEAD
 To be added
+=======
+#### Training Classifier
+
+##### Configuration
+To allow a user to customise their iPet instance, we expect them to specify the following variables in `constants.py`:
+- `agg_mins`: The total time a single feature vector aggregates on , in minutes
+- `device_name` : Name list of the devices in the network. For e.g. `['device_A','device_B,'device_C']`
+
+##### Generating Fetaure Vectors
+The raw data is converted to numpy feature vectors for the model to training on by running the script:
+```sh
+$ python Feature_Generation_Magg.py 
+```
+
+The feature vectors generated are saved in the ```data/Traces_Magg``` directory
+
+##### Training  <img src="https://latex.codecogs.com/gif.latex?\mathcal{M}_\text{seq}" />  Classifier
+We train the sequential fingerprinting model using the following script: 
+```sh
+$ python Train_Magg.py 
+```
+The trained model is saved as ```Models/M_agg_fingeprinting.sav``` 
+
+You can access the model using
+```sh
+import pickle
+model_magg = pickle.load(open('Models/M_agg_fingeprinting.sav', 'rb'))
+```
+>>>>>>> 0a39d5a (Adding M_agg)

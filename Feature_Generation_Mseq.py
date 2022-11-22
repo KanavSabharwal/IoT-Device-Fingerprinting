@@ -2,22 +2,8 @@ import pandas as pd
 import numpy as np
 from multiprocessing import Pool
 import os 
-from constants import device_name,actual_id,total_time,omega
-from split import split_traces_mseq
-
-def check_polarity(ip_src:str)->int:
-    """Check the direction of a packet
-
-    Args:
-        ip_src (str): Source IP Address
-
-    Returns:
-        int: -1 for incoming packets, 1 for outgoing packets
-    """
-    if ip_src.startswith('192'):
-        return 1
-    else:
-        return -1
+from constants import *
+from helper import *
 
 def omega_num_helper(curr_times,omega):
     # Helper Function
